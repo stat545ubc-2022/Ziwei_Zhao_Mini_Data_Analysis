@@ -318,7 +318,7 @@ Make sure it's clear what research question you are doing each operation for!
 
 <!------------------------- Start your work below ----------------------------->
 
-***4.1.1 What is the relationship between game's release time and game's languages? ***
+***4.1.1 What is the relationship between game's release time and game's languages?***
 ```{r}
 #Summarizing: Task 2
 
@@ -355,7 +355,7 @@ game_time_languages_final
 
 In this graphing part, I calculated the mean value of the numbers of language in each year and store the value in mean_languages_number. Then, I used this variable and release_year variable to plot a point and line graph which can clearly demonstrate the trend of the number of languages each game uses. The above graph clearly shows that the game supports more languages in general over time, which is very important for further explore the relationship between these two variables. 
 
-***4.1.2 How does game's price affect game's review? Are cheap games easier to get good reviews? ***
+***4.1.2 How does game's price affect game's review? Are cheap games easier to get good reviews?***
 ```{r}
 #Summarizing: Task 3
 
@@ -396,7 +396,7 @@ game_price_reviews
 
 In this graphing part, first I tried to separate the rating from all_reviews variable because there are lots of information in the all_reviews variable which need to be extracted before using. In this analysis, we just need to extract the rating part since we just want to use the information related to rating, then using group_by() to group different price levels. I also apply scale_y_continuous(trans = 'log10') to Count because the range of Count (x axis) is too large. It can been seen from the above graph that low-priced games have more positive and mostly positive ratings than mid-priced and high-priced games.
 
-***4.1.3 How has the mature content of games changed over these years? ***
+***4.1.3 How has the mature content of games changed over these years?***
 ```{r}
 #Summarizing: Task 2
 
@@ -441,7 +441,7 @@ game_time_mature
 
 In this graphing part, I used geom_line function and geom_point function to plot the graph which clearly demonstrates the trend and relationship between games' release year and the number of games which have mature content in each year. It shows that the number of games which have mature content increases over time, and the data increases quickly from 2015 to 2019. However, the data experiences a sharp decrease during 2019 and 2020, and I guess maybe this is because of Covid.
 
-***4.1.4 What is the relationship between game’s genre and the change of game's price? ***
+***4.1.4 What is the relationship between game’s genre and the change of game's price?***
 
 ```{r}
 #Summarizing: Task 2

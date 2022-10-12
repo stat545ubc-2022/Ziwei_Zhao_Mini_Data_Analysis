@@ -429,13 +429,13 @@ sample_n(parking_meters, 8)
     ##   meter_head r_mf_9a_6p r_mf_6…¹ r_sa_…² r_sa_…³ r_su_…⁴ r_su_…⁵ rate_…⁶ time_…⁷
     ##   <chr>      <chr>      <chr>    <chr>   <chr>   <chr>   <chr>   <chr>   <chr>  
     ## 1 Twin       $1.00      $1.00    $1.00   $1.00   $1.00   $1.00   <NA>    METER …
-    ## 2 Twin       $3.00      $4.00    $3.00   $4.00   $3.00   $4.00   <NA>    METER …
+    ## 2 Twin       $1.00      $1.00    $1.00   $1.00   $1.00   $1.00   <NA>    METER …
     ## 3 Twin       $1.00      $1.00    $1.00   $1.00   $1.00   $1.00   <NA>    METER …
-    ## 4 Twin       $1.00      $1.00    $1.00   $1.00   $1.00   $1.00   <NA>    METER …
-    ## 5 Twin       $2.00      $1.00    $2.00   $1.00   $2.00   $1.00   $1.00   METER …
-    ## 6 Twin       $2.00      $1.00    $2.00   $1.00   $2.00   $1.00   <NA>    METER …
-    ## 7 Twin       $6.00      $1.00    $6.00   $1.00   $6.00   $1.00   <NA>    METER …
-    ## 8 Twin       $3.00      $2.00    $3.00   $2.00   $3.00   $2.00   <NA>    METER …
+    ## 4 Twin       $2.00      $1.00    $2.00   $1.00   $2.00   $1.00   <NA>    METER …
+    ## 5 Twin       $3.00      $3.00    $3.00   $3.00   $3.00   $3.00   <NA>    METER …
+    ## 6 Twin       $1.00      $1.00    $1.00   $1.00   $1.00   $1.00   <NA>    METER …
+    ## 7 Twin       $5.00      $2.00    $5.00   $2.00   $5.00   $2.00   <NA>    METER …
+    ## 8 Twin       $3.00      $1.00    $3.00   $1.00   $3.00   $1.00   <NA>    METER …
     ## # … with 13 more variables: t_mf_9a_6p <chr>, t_mf_6p_10 <chr>,
     ## #   t_sa_9a_6p <chr>, t_sa_6p_10 <chr>, t_su_9a_6p <chr>, t_su_6p_10 <chr>,
     ## #   time_misc <chr>, credit_card <chr>, pay_phone <chr>, longitude <dbl>,
@@ -479,16 +479,16 @@ sample_frac(vancouver_trees, 0.1)
     ## # A tibble: 14,661 × 20
     ##    tree_id civic_number std_st…¹ genus…² speci…³ culti…⁴ commo…⁵ assig…⁶ root_…⁷
     ##      <dbl>        <dbl> <chr>    <chr>   <chr>   <chr>   <chr>   <chr>   <chr>  
-    ##  1  137192         1894 E 8TH AV PRUNUS  SARGEN… RANCHO  RANCHO… N       N      
-    ##  2   24493          951 E 23RD … FRAXIN… OXYCAR… <NA>    CAUCAS… N       N      
-    ##  3  180596         6130 INVERNE… ACER    CAPPAD… RUBRUM  RED CA… N       N      
-    ##  4  196089          376 TALISMA… MAGNOL… KOBUS   <NA>    KOBUS … N       N      
-    ##  5   63525         3050 BURRARD… ACER    RUBRUM  <NA>    RED MA… Y       N      
-    ##  6  221106         1608 W 59TH … ACER    TRUNCA… PACIFI… PACIFI… N       N      
-    ##  7  225342         1708 E 35TH … PYRUS   CALLER… CHANTI… CHANTI… N       N      
-    ##  8  263914         3418 ADANAC … CARPIN… BETULUS LUCAS   LUCAS … N       N      
-    ##  9  160541         4303 W 16TH … BETULA  PENDULA <NA>    EUROPE… N       N      
-    ## 10   12185         3407 E 47TH … CRATAE… PHAENO… <NA>    WASHIN… N       N      
+    ##  1  206307         6017 VICTORI… SORBUS  AUCUPA… CARDIN… CARDIN… N       Y      
+    ##  2  120046         3896 W 38TH … PARROT… PERSICA <NA>    PERSIA… N       N      
+    ##  3  130391         2702 MANITOB… LIQUID… STYRAC… WORPLE… WORPLE… N       N      
+    ##  4  195319         4043 RUPERT … TILIA   CORDATA DEGROOT DEGROO… N       N      
+    ##  5  194851          889 W 13TH … FRAXIN… PENNSY… PATMORE PATMOR… N       N      
+    ##  6  169882         2908 W 30TH … CHAMAE… LAWSON… <NA>    LAWSON… N       N      
+    ##  7  138473         1777 W 7TH AV ACER    FREEMA… SCARLE… FREEMA… N       N      
+    ##  8  180747         3990 TRAFALG… MAGNOL… XX      SERENE  MAGNOL… Y       N      
+    ##  9  105227         3327 PRICE ST TILIA   EUCHLO… <NA>    CRIMEA… N       N      
+    ## 10  104586         4431 PERRY ST TILIA   AMERIC… <NA>    BASSWO… N       N      
     ## # … with 14,651 more rows, 11 more variables: plant_area <chr>,
     ## #   on_street_block <dbl>, on_street <chr>, neighbourhood_name <chr>,
     ## #   street_side_name <chr>, height_range_id <dbl>, diameter <dbl>, curb <chr>,
@@ -814,7 +814,7 @@ for!
 <!------------------------- Start your work below ----------------------------->
 
 ***4.1.1 What is the relationship between game’s release time and game’s
-languages? ***
+languages?***
 
 ``` r
 #Summarizing: Task 2
@@ -881,7 +881,7 @@ supports more languages in general over time, which is very important
 for further explore the relationship between these two variables.
 
 ***4.1.2 How does game’s price affect game’s review? Are cheap games
-easier to get good reviews? ***
+easier to get good reviews?***
 
 ``` r
 #Summarizing: Task 3
@@ -956,8 +956,8 @@ can been seen from the above graph that low-priced games have more
 positive and mostly positive ratings than mid-priced and high-priced
 games.
 
-***4.1.3 How has the mature content of games changed over these years?
-***
+***4.1.3 How has the mature content of games changed over these
+years?***
 
 ``` r
 #Summarizing: Task 2
@@ -1057,7 +1057,7 @@ mature content increases over time, and the data increases quickly from
 and 2020, and I guess maybe this is because of Covid.
 
 ***4.1.4 What is the relationship between game’s genre and the change of
-game’s price? ***
+game’s price?***
 
 ``` r
 #Summarizing: Task 2
