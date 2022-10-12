@@ -1,0 +1,501 @@
+---
+title: "Mini Data-Analysis Deliverable 1"
+output:
+  output: github_document
+  #html_document: default
+  #pdf_document: default
+---
+
+# Welcome to your (maybe) first-ever data analysis project!
+
+And hopefully the first of many. Let's get started:
+
+1.  Install the [`datateachr`](https://github.com/UBC-MDS/datateachr) package by typing the following into your **R terminal**:
+
+<!-- -->
+
+    install.packages("devtools")
+    devtools::install_github("UBC-MDS/datateachr")
+
+2.  Load the packages below.
+
+```{r}
+library(datateachr)
+library(tidyverse)
+```
+
+3.  Make a repository in the <https://github.com/stat545ubc-2022> Organization. You will be working with this repository for the entire data analysis project. You can either make it public, or make it private and add the TA's and Lucy as collaborators. A link to help you create a private repository is available on the #collaborative-project Slack channel. 
+
+# Instructions
+
+## For Both Milestones
+
+-   Each milestone is worth 45 points. The number of points allocated to each task will be annotated within each deliverable. Tasks that are more challenging will often be allocated more points.
+
+-   10 points will be allocated to the reproducibility, cleanliness, and coherence of the overall analysis. While the two milestones will be submitted as independent deliverables, the analysis itself is a continuum - think of it as two chapters to a story. Each chapter, or in this case, portion of your analysis, should be easily followed through by someone unfamiliar with the content. [Here](https://swcarpentry.github.io/r-novice-inflammation/06-best-practices-R/) is a good resource for what constitutes "good code". Learning good coding practices early in your career will save you hassle later on!
+
+## For Milestone 1
+
+**To complete this milestone**, edit [this very `.Rmd` file](https://raw.githubusercontent.com/UBC-STAT/stat545.stat.ubc.ca/master/content/mini-project/mini-project-1.Rmd) directly. Fill in the sections that are tagged with `<!--- start your work below --->`.
+
+**To submit this milestone**, make sure to knit this `.Rmd` file to an `.md` file by changing the YAML output settings from `output: html_document` to `output: github_document`. Commit and push all of your work to the mini-analysis GitHub repository you made earlier, and tag a release on GitHub. Then, submit a link to your tagged release on canvas.
+
+**Points**: This milestone is worth 45 points: 43 for your analysis, 1 point for having your Milestone 1 document knit error-free, and 1 point for tagging your release on Github.
+
+# Learning Objectives
+
+By the end of this milestone, you should:
+
+-   Become familiar with your dataset of choosing
+-   Select 4 questions that you would like to answer with your data
+-   Generate a reproducible and clear report using R Markdown
+-   Become familiar with manipulating and summarizing your data in tibbles using `dplyr`, with a research question in mind.
+
+# Task 1: Choose your favorite dataset (10 points)
+
+The `datateachr` package by Hayley Boyce and Jordan Bourak currently composed of 7 semi-tidy datasets for educational purposes. Here is a brief description of each dataset:
+
+-   *apt_buildings*: Acquired courtesy of The City of Toronto's Open Data Portal. It currently has 3455 rows and 37 columns.
+
+-   *building_permits*: Acquired courtesy of The City of Vancouver's Open Data Portal. It currently has 20680 rows and 14 columns.
+
+-   *cancer_sample*: Acquired courtesy of UCI Machine Learning Repository. It currently has 569 rows and 32 columns.
+
+-   *flow_sample*: Acquired courtesy of The Government of Canada's Historical Hydrometric Database. It currently has 218 rows and 7 columns.
+
+-   *parking_meters*: Acquired courtesy of The City of Vancouver's Open Data Portal. It currently has 10032 rows and 22 columns.
+
+-   *steam_games*: Acquired courtesy of Kaggle. It currently has 40833 rows and 21 columns.
+
+-   *vancouver_trees*: Acquired courtesy of The City of Vancouver's Open Data Portal. It currently has 146611 rows and 20 columns.
+
+**Things to keep in mind**
+
+-   We hope that this project will serve as practice for carrying our your own *independent* data analysis. Remember to comment your code, be explicit about what you are doing, and write notes in this markdown document when you feel that context is required. As you advance in the project, prompts and hints to do this will be diminished - it'll be up to you!
+
+-   Before choosing a dataset, you should always keep in mind **your goal**, or in other ways, *what you wish to achieve with this data*. This mini data-analysis project focuses on *data wrangling*, *tidying*, and *visualization*. In short, it's a way for you to get your feet wet with exploring data on your own.
+
+And that is exactly the first thing that you will do!
+
+1.1 Out of the 7 datasets available in the `datateachr` package, choose **4** that appeal to you based on their description. Write your choices below:
+
+**Note**: We encourage you to use the ones in the `datateachr` package, but if you have a dataset that you'd really like to use, you can include it here. But, please check with a member of the teaching team to see whether the dataset is of appropriate complexity. Also, include a **brief** description of the dataset here to help the teaching team understand your data.
+
+<!-------------------------- Start your work below ---------------------------->
+
+1: building_permits
+2: steam_games
+3: parking_meters
+4: vancouver_trees
+
+<!----------------------------------------------------------------------------->
+
+1.2 One way to narrowing down your selection is to *explore* the datasets. Use your knowledge of dplyr to find out at least *3* attributes about each of these datasets (an attribute is something such as number of rows, variables, class type...). The goal here is to have an idea of *what the data looks like*.
+
+*Hint:* This is one of those times when you should think about the cleanliness of your analysis. I added a single code chunk for you below, but do you want to use more than one? Would you like to write more comments outside of the code chunk?
+
+<!-------------------------- Start your work below ---------------------------->
+
+str(): Explore the *structure* of parking_meters.\
+glimpse(): Explore the *variables' name of the columns* in building_permits.\
+class(): Explore the *overall structure of the data* in building_permits.\
+
+```{r}
+building_permits
+
+### Explore the structure of parking_meters ###
+str(building_permits)
+
+### Explore the variables' name of the columns in building_permits ###
+glimpse(building_permits)
+
+### Explore the overall structure of the data in building_permits ###
+class(building_permits)
+
+```
+
+dim(): Explore the *number of rows and the number of columns* steam_games.\
+head(): Explore the *first 6 rows* by default.\
+tail(): Explore the *last 6 rows* by default.\
+
+```{r}
+steam_games
+
+### Explore the number of rows and the number of columns steam_games ###
+dim(steam_games)
+
+### Explore the first 6 rows by default ###
+head(steam_games)
+
+### Explore the last 6 rows by default ###
+tail(steam_games)
+
+```
+
+names(): Explore the *names of variable* in parking_meters.\
+summary(): Explore *flow_sample's each column*, *data type* and a few other *attributes which are especially useful for numeric attributes*.\
+sample_n(): Explore *8 random rows* in parking_meters.\
+
+```{r}
+parking_meters
+
+### Explore the names of variable in parking_meters ###
+names(parking_meters)
+
+### Explore flow_sample's each column, data type and a few other attributes which are especially useful for numeric attributes ###
+summary(parking_meters)
+
+### Explore 8 random rows in parking_meters ###
+sample_n(parking_meters, 8)
+
+```
+
+sample_frac(): Explore the *N% random rows* in vancouver_trees.\
+nrow(): Explore the *number of rows* in vancouver_trees.\
+ncol(): Explore the *number of columns* in vancouver_trees.\
+
+```{r}
+vancouver_trees
+
+### Explore the N% random rows in vancouver_trees ###
+sample_frac(vancouver_trees, 0.1)
+
+### Explore the number of rows in vancouver_trees ###
+nrow(vancouver_trees)
+
+### Explore the number of columns in vancouver_trees ###
+ncol(vancouver_trees)
+
+```
+
+<!----------------------------------------------------------------------------->
+
+1.3 Now that you've explored the 4 datasets that you were initially most interested in, let's narrow it down to 2. What lead you to choose these 2? Briefly explain your choices below, and feel free to include any code in your explanation.
+
+<!-------------------------- Start your work below ---------------------------->
+
+steam_games, vancouver_trees
+
+***1.3.1 steam_games explanation***
+
+First, I choose steam_game dataset because there are so many kinds of information about a game, such as game's types, price, game_details and etc. We can get the developer and publisher about a game, explore what types of games have more reviews than others, find whether there is a difference between the recent reviews and all reviews. and the relationship between the price and the type of a game.
+
+***1.3.2 vancouver_trees explanation***
+
+Second, I choose vancouver_trees dataset because there are various numeric attributes of Vancouver trees. For example, we can explore the geographic distribution of trees in Vancouver by latitude, longitude and std_street, get the date when the tree was planted, and the relationship between tree's species and tree's diameter.
+
+<!----------------------------------------------------------------------------->
+
+1.4 Time for the final decision! Going back to the beginning, it's important to have an *end goal* in mind. For example, if I had chosen the `titanic` dataset for my project, I might've wanted to explore the relationship between survival and other variables. Try to think of 1 research question that you would want to answer with each dataset. Note them down below, and make your final choice based on what seems more interesting to you!
+
+<!-------------------------- Start your work below ---------------------------->
+
+I finally decide to choose the `steam_games` dataset for my project, and I would like to explore the relationship between the game reviews and the game prices, and whether the difference between recent_reviews and all_reviews related to game genres.
+
+For the `vancouver_trees` dataset, my research question is what is the relationship between the genus_name and the diameter.
+
+<!----------------------------------------------------------------------------->
+
+# Important note
+
+Read Tasks 2 and 3 *fully* before starting to complete either of them. Probably also a good point to grab a coffee to get ready for the fun part!
+
+This project is semi-guided, but meant to be *independent*. For this reason, you will complete tasks 2 and 3 below (under the **START HERE** mark) as if you were writing your own exploratory data analysis report, and this guidance never existed! Feel free to add a brief introduction section to your project, format the document with markdown syntax as you deem appropriate, and structure the analysis as you deem appropriate. Remember, marks will be awarded for completion of the 4 tasks, but 10 points of the whole project are allocated to a reproducible and clean analysis. If you feel lost, you can find a sample data analysis [here](https://www.kaggle.com/headsortails/tidy-titarnic) to have a better idea. However, bear in mind that it is **just an example** and you will not be required to have that level of complexity in your project.
+
+# Task 2: Exploring your dataset (15 points)
+
+If we rewind and go back to the learning objectives, you'll see that by the end of this deliverable, you should have formulated *4* research questions about your data that you may want to answer during your project. However, it may be handy to do some more exploration on your dataset of choice before creating these questions - by looking at the data, you may get more ideas. **Before you start this task, read all instructions carefully until you reach START HERE under Task 3**.
+
+2.1 Complete *4 out of the following 8 exercises* to dive deeper into your data. All datasets are different and therefore, not all of these tasks may make sense for your data - which is why you should only answer *4*. Use *dplyr* and *ggplot*.
+
+1.  Plot the distribution of a numeric variable.
+2.  Create a new variable based on other variables in your data (only if it makes sense)
+3.  Investigate how many missing values there are per variable. Can you find a way to plot this?
+4.  Explore the relationship between 2 variables in a plot.
+5.  Filter observations in your data according to your own criteria. Think of what you'd like to explore - again, if this was the `titanic` dataset, I may want to narrow my search down to passengers born in a particular year...
+6.  Use a boxplot to look at the frequency of different observations within a single variable. You can do this for more than one variable if you wish!
+7.  Make a new tibble with a subset of your data, with variables and observations that you are interested in exploring.
+8.  Use a density plot to explore any of your variables (that are suitable for this type of plot).
+
+2.2 For each of the 4 exercises that you complete, provide a *brief explanation* of why you chose that exercise in relation to your data (in other words, why does it make sense to do that?), and sufficient comments for a reader to understand your reasoning and code.
+
+<!-------------------------- Start your work below ---------------------------->
+
+
+***1. Plot the distribution of a numeric variable.***
+```{r}
+
+#maximum = max(steam_games[["original_price"]], na.rm = TRUE)
+#maximum
+
+options(scipen = 1)
+steam_games %>%
+  filter(original_price < 100) %>%
+  ggplot(aes(x=original_price)) +
+  geom_histogram(colour = 'grey', fill = "lightgreen", bins = 60)
+
+```
+
+I plotted the histogram of game's original price which clearly shows the distribution of game's original price. I filtered the data with "original_price<100" because the original prices of some games are too high and have no reference value, or even the data is wrong (I printed the maximum original_price and get 730640). From the above graph we can see that most of the games have their original price under 15 dollars, there are very few games' price between 25 dollars to 50 dollars, and almost none of the games' price above 50 dollars. This histogram can give us a clear understanding of the price distribution of the game so I chose to plot this.
+
+***2. Create a new variable based on other variables in your data (only if it makes sense)***
+```{r}
+
+steam_games %>%
+  mutate(languages_number = str_count(languages, ',') + 1)
+
+```
+I created a new variable about counting the number of the supported languages for each game. I think this variable might affect the number of people who wish to play this game. We can analyze the variables all_reviews and recent_reviews such as the number of reviewer and rating level to verify this conclusion. I think this is a variable which can be analyzed further and we can find lots of interesting results from analyzing this variable.
+
+***3. Explore the relationship between 2 variables in a plot.***
+```{r}
+
+steam_games %>%
+  mutate(languages_number = str_count(languages, ',') + 1) %>%
+  mutate(release_date_format = as.Date(release_date, '%b %d, %Y')) %>%
+  drop_na(release_date_format) %>%
+  drop_na(languages_number) %>%
+  ggplot(aes(x = release_date_format, y = languages_number)) + 
+  geom_jitter(alpha = 0.2, size = 0.6, width = 0.1, color = "darkblue") +
+  #geom_jitter(color = "darkblue") +
+  coord_flip() +
+  xlab("Release Date") +
+  ylab("Number of Languages Supported")
+  
+```
+
+The analysis in this part is about the relationship between the number of languages and the release date for each game. The above point graph shows that more and more games are supported in a wider variety of languages over time. Since the number of supported languages is an integer, the points seems to form many vertical lines on the graph.
+
+***4. Filter observations in your data according to your own criteria. Think of what you’d like to explore - again, if this was the titanic dataset, I may want to narrow my search down to passengers born in a particular year…***
+
+```{r}
+
+steam_games %>%
+  filter(discount_price - original_price > 0)
+
+```
+
+I filtered the dataset with "discount_price - original_price > 0" in order to get the games which have a higher price after discounting. I think this step is very important and it can help us continue to explore the attributes of the game with increasing prices and its relationship with other variables.
+
+<!----------------------------------------------------------------------------->
+
+# Task 3: Write your research questions (5 points)
+
+So far, you have chosen a dataset and gotten familiar with it through exploring the data. Now it's time to figure out 4 research questions that you would like to answer with your data! Write the 4 questions and any additional comments at the end of this deliverable. These questions are not necessarily set in stone - TAs will review them and give you feedback; therefore, you may choose to pursue them as they are for the rest of the project, or make modifications!
+
+<!--- *****START HERE***** --->
+
+1. What is the relationship between game's release time and game's languages?
+2. How does game's price affect game's review? Are cheap games easier to get good reviews?
+3. How has the mature content of games changed over these years?
+4. What is the relationship between game’s genre and the change of game's price?
+
+# Task 4: Process and summarize your data (13 points)
+
+From Task 2, you should have an idea of the basic structure of your dataset (e.g. number of rows and columns, class types, etc.). Here, we will start investigating your data more in-depth using various data manipulation functions.
+
+### 1.1 (10 points)
+
+Now, for each of your four research questions, choose one task from options 1-4 (summarizing), and one other task from 4-8 (graphing). You should have 2 tasks done for each research question (8 total). Make sure it makes sense to do them! (e.g. don't use a numerical variables for a task that needs a categorical variable.). Comment on why each task helps (or doesn't!) answer the corresponding research question.
+
+Ensure that the output of each operation is printed!
+
+**Summarizing:**
+
+1.  Compute the *range*, *mean*, and *two other summary statistics* of **one numerical variable** across the groups of **one categorical variable** from your data.
+2.  Compute the number of observations for at least one of your categorical variables. Do not use the function `table()`!
+3.  Create a categorical variable with 3 or more groups from an existing numerical variable. You can use this new variable in the other tasks! *An example: age in years into "child, teen, adult, senior".*
+4.  Based on two categorical variables, calculate two summary statistics of your choosing.
+
+**Graphing:**
+
+5.  Create a graph out of summarized variables that has at least two geom layers.
+6.  Create a graph of your choosing, make one of the axes logarithmic, and format the axes labels so that they are "pretty" or easier to read.
+7.  Make a graph where it makes sense to customize the alpha transparency.
+8.  Create 3 histograms out of summarized variables, with each histogram having different sized bins. Pick the "best" one and explain why it is the best.
+
+Make sure it's clear what research question you are doing each operation for!
+
+<!------------------------- Start your work below ----------------------------->
+
+***4.1.1 What is the relationship between game's release time and game's languages? ***
+```{r}
+#Summarizing: Task 2
+
+game_time_languages <- steam_games %>%
+  mutate(languages_number = str_count(languages, ',') + 1) %>% # create variable languages_number by counting languages variable
+  mutate(release_year = format(as.Date(release_date, '%b %d, %Y'),'%Y')) %>% # get the year of the release_date
+  drop_na(release_year) %>% # drop NA from release_year
+  group_by(release_year, languages_number) %>% # group by release_year and languages_number
+  summarize(number1 = n(), .groups = "drop")
+
+game_time_languages
+
+```
+
+In this summarizing part, first I tried to count the language number of each game because "languages" variable is not a numeric variable in the dataset. If I want to explore the relationship between release time and languages, I think it is better to transfer this variable to numeric variable in some way. Second, the release_date variable is a column of <chr> which includes the month and day. This kind of date format is hard to use for analysis, thus I transferred it to categorical variable release_year which is easy to use.
+
+```{r}
+#Graphing: Task 5
+
+game_time_languages_final <- game_time_languages %>%
+  group_by(release_year) %>%
+  drop_na(languages_number) %>%
+  drop_na(number1) %>%
+  summarize(mean_languages_number = (sum(languages_number*number1)/sum(number1))) %>%
+  ggplot(aes(x=as.Date(release_year, '%Y'), y=mean_languages_number)) +
+  geom_line(color = "lightgreen") +
+  geom_point(color = "darkgreen") +
+  xlab("Release Year") +
+  ylab("Mean of Languages Number in Each Year")
+  
+game_time_languages_final
+
+```
+
+In this graphing part, I calculated the mean value of the numbers of language in each year and store the value in mean_languages_number. Then, I used this variable and release_year variable to plot a point and line graph which can clearly demonstrate the trend of the number of languages each game uses. The above graph clearly shows that the game supports more languages in general over time, which is very important for further explore the relationship between these two variables. 
+
+***4.1.2 How does game's price affect game's review? Are cheap games easier to get good reviews? ***
+```{r}
+#Summarizing: Task 3
+
+game_price_classification <- within(steam_games, {   
+  original_price_level <- NA # initialize the variable
+  original_price_level[original_price < 10] <- "Low" # if original_price < 10, then Low
+  original_price_level[original_price >= 10 & original_price < 25] <- "Medium" # if original_price >= 10 & original_price < 25, then Medium
+  original_price_level[original_price >= 25] <- "High" # if original_price >= 25, then High
+   } )
+
+game_price_classification
+
+```
+
+In this summarizing part, I tried to separate original prices into three levels: low level (original_price < 10), medium level (original_price >= 10 & original_price < 25), and high level (original_price >= 25). I think this can be more intuitive to see the effect of the high or low price on rating and helpful for exploring the relationship with rating. 
+
+```{r}
+#Graphing: Task 6
+
+rating_positive_and_negative = c("Positive", "Overwhelmingly Positive", "Very Positive", "Mostly Positive", "Mixed", "Mostly Negative", "Very Negative", "Overwhelmingly Negative", "Negative") # initialize the rating labels
+
+game_price_reviews <- game_price_classification %>%
+  separate(all_reviews, into=c("rating"), sep=',', extra = "drop", remove=FALSE) %>% # separate the ratings from all_reviews
+  filter(rating %in% rating_positive_and_negative) %>% # remove wrong rating like user reviews and NaN 
+  group_by(original_price_level) %>% # group by original_price_level
+  count(rating) %>% # count different kinds of ratings within each group
+  drop_na(original_price_level) %>% # drop NA in original_price_level
+  ggplot(aes(x = original_price_level, weight = n)) + 
+  geom_bar(aes(fill = rating)) +
+  scale_y_continuous(trans = 'log10') +
+  coord_flip() +
+  xlab("Original Price Level") +
+  ylab("log10(Count)")
+  
+game_price_reviews
+
+```
+
+In this graphing part, first I tried to separate the rating from all_reviews variable because there are lots of information in the all_reviews variable which need to be extracted before using. In this analysis, we just need to extract the rating part since we just want to use the information related to rating, then using group_by() to group different price levels. I also apply scale_y_continuous(trans = 'log10') to Count because the range of Count (x axis) is too large. It can been seen from the above graph that low-priced games have more positive and mostly positive ratings than mid-priced and high-priced games.
+
+***4.1.3 How has the mature content of games changed over these years? ***
+```{r}
+#Summarizing: Task 2
+
+game_mature_content <- within(steam_games, {   
+  whether_mature_content <- NA # initialize the variable
+  whether_mature_content[!is.na(mature_content)] <- "Yes" # if mature_content != NA, then Yes
+  whether_mature_content[is.na(mature_content) | mature_content == "NaN"] <- "No" # if mature_content == NA or NaN, then No
+   } )
+
+game_mature_content
+
+game_count_mature <- game_mature_content %>%
+  mutate(release_date_year = format(as.Date(release_date, '%b %d, %Y'),'%Y')) %>% # get year variable
+  drop_na(release_date_year) %>% # drop NA from year variable
+  group_by(release_date_year, whether_mature_content) %>% # group by release_date_year and whether_mature_content
+  summarize(n = n(), .groups = "drop")
+
+game_count_mature
+
+```
+
+In this summarizing part, first I created a new variable game_mature_content which is a categorical variable and shows whether the game has some mature content, then I extracted the released year variable from release_date variable and group games of the same year into one group. This way can make me intuitively see the number of games with mature content in each year which is useful for exploring the relationship between release year and mature content. It can also be seen from the table that the older the game, the less mature content it has, and in some years there is even no game with mature content at all. There are 1028 games released in 2018 with mature content, Which is the maximum of the game with mature content in the table.
+
+```{r}
+#Graphing: Task 5
+
+game_time_mature <- game_mature_content %>%
+  mutate(release_date_year = format(as.Date(release_date, '%b %d, %Y'),'%Y')) %>% # get year variable
+  drop_na(release_date_year) %>% # drop NA from year variable
+  group_by(release_date_year) %>% # group by release_date_year
+  filter(whether_mature_content == "Yes") %>% # filter the data which has not null mature_content value
+  summarize(n = n(), .groups = "drop") %>%
+  ggplot(aes(x=as.Date(release_date_year, '%Y'), y=n)) +
+  geom_line(color = "lightblue") +
+  geom_point(color = "darkblue") +
+  xlab("Release Year") +
+  ylab("Number of Mature Content")
+  
+game_time_mature
+
+```
+
+In this graphing part, I used geom_line function and geom_point function to plot the graph which clearly demonstrates the trend and relationship between games' release year and the number of games which have mature content in each year. It shows that the number of games which have mature content increases over time, and the data increases quickly from 2015 to 2019. However, the data experiences a sharp decrease during 2019 and 2020, and I guess maybe this is because of Covid.
+
+***4.1.4 What is the relationship between game’s genre and the change of game's price? ***
+
+```{r}
+#Summarizing: Task 2
+steam_games
+
+game_type_discount <- steam_games %>%
+  mutate(discount_percentage = (discount_price - original_price) / original_price * 100) %>% # get discount percentage
+  drop_na(discount_percentage) %>% # drop NA from discount_percentage variable
+  separate(genre, into=c("new_genre"), sep=',', extra = "drop", remove=FALSE) %>% # separate the first genre from genre variable
+  drop_na(new_genre) %>% # drop NA from new_genre variable
+  group_by(new_genre) %>% # group by new_genre
+  summarize(n = n())
+  
+game_type_discount
+
+```
+
+In this summarizing part, I created a new variable named discount_percentage which is from discount_price and original_price. It is very useful because I can easily get the percentage of the price change through this variable. Besides that, I noticed that some games have more than one genre, so in order to use this variable I decided to use the first genre of every row as this game's genre and created a new variable called new_genre to store the separated genre. This method is a good way to determine the genre of each game, and then we could easily compute the number of games under each genre.
+
+```{r}
+#Graphing: Task 7
+
+type_discount_game <- steam_games %>%
+  mutate(discount_percentage = (discount_price - original_price) / original_price * 100) %>% # get discount percentage
+  drop_na(discount_percentage) %>% # drop NA from discount_percentage variable
+  separate(genre, into=c("new_genre"), sep=',', extra = "drop", remove=FALSE) %>% # separate the first genre from genre variable
+  drop_na(new_genre) %>% # drop NA from new_genre variable
+  #group_by(new_genre) %>% # group by new_genre
+  
+  ggplot(aes(x=new_genre, y=discount_percentage)) +
+  geom_jitter(alpha = 0.3, size = 0.6, width = 0.3, color = "darkblue") +
+  xlab("Genre Type") +
+  ylab("Percentage of Discounting") +
+  coord_flip()
+  
+type_discount_game
+
+```
+
+In this graphing part, I used geom_jitter() function to plot the percentage of discounting for each genre of games. I set the alpha value equal to 0.3, so the number of points under each genre can also be clearly figured out. The graph intuitively shows that some genres of games like Action games and Adventure games have a big price increase, in contrast, some type of genres like Education and Animation & Modeling are almost no price change during these years. A problem of this graph is that there are some outliers on the right part of the graph which are so large and maybe wrong. The result of the graph is very important because we can clearly see the amounts of data under different genre types besides the fluctuations of game prices which is helpful for further exploring and summarizing the relationship between the two variables.
+
+<!----------------------------------------------------------------------------->
+
+### 1.2 (3 points)
+
+Based on the operations that you've completed, how much closer are you to answering your research questions? Think about what aspects of your research questions remain unclear. Can your research questions be refined, now that you've investigated your data a bit more? Which research questions are yielding interesting results?
+
+<!-------------------------- Start your work below ---------------------------->
+
+I think I have already been very close to some answers of my research questions based on the operations that I've completed. In Task 1, I roughly get to know some basic attributes like number of rows and columns of the four datasets I selected. In Task 2, I have a deeper understanding of the numerical and categorical variables of the steam_games dataset by doing some basic operations such as filtering the data and plotting the distribution of a variable on this dataset. In Task 3 and 4, I come up with 4 research questions and process some data by summarizing and graphing. I observe specific categorical variable and get lots of useful information for some attributes which can be used in the my research. I also plotted the line chart, bar chart, as well as jitter chart, and some charts show the correlation of two variables which makes me closer to the answers of my questions.
+
+I also have some aspects remain unclear in my questions. In Task 3, The second question I come up with is "how does game's price affect game's review?". There are so many aspects about all_review variable like rating level and the amount of reviewers, but I can only extract game's rating level from all_review variable. I think I also need to analyze other attributes in this variable in order to get the comprehensive conclusion of this research question, but I haven't find a good way to extract other attributes out. Perhaps this question can also be refined to explore the relationship between price and rating level, as well as the relationship between price and reviews amount. Then I can compare the results of these two ways with the result of the original question. I think all of my research questions are yielding interesting results.
+<!----------------------------------------------------------------------------->
+
+### Attribution
+
+Thanks to Icíar Fernández Boyano for mostly putting this together, and Vincenzo Coia for launching.
