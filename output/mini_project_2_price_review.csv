@@ -1,0 +1,43 @@
+original_price_level,all_rating,n
+High,Mixed,351
+High,Mostly Negative,42
+High,Mostly Positive,259
+High,Negative,2
+High,Overwhelmingly Positive,25
+High,Positive,119
+High,Very Negative,3
+High,Very Positive,358
+Low,Mixed,972
+Low,Mostly Negative,155
+Low,Mostly Positive,768
+Low,Negative,31
+Low,Overwhelmingly Negative,4
+Low,Overwhelmingly Positive,82
+Low,Positive,869
+Low,Very Negative,7
+Low,Very Positive,1115
+Medium,Mixed,892
+Medium,Mostly Negative,133
+Medium,Mostly Positive,783
+Medium,Negative,28
+Medium,Overwhelmingly Negative,1
+Medium,Overwhelmingly Positive,118
+Medium,Positive,553
+Medium,Very Negative,10
+Medium,Very Positive,1309
+Very High,Mixed,123
+Very High,Mostly Negative,18
+Very High,Mostly Positive,92
+Very High,Negative,4
+Very High,Overwhelmingly Positive,4
+Very High,Positive,76
+Very High,Very Positive,86
+Very Low,Mixed,2236
+Very Low,Mostly Negative,417
+Very Low,Mostly Positive,1341
+Very Low,Negative,67
+Very Low,Overwhelmingly Negative,2
+Very Low,Overwhelmingly Positive,89
+Very Low,Positive,1842
+Very Low,Very Negative,11
+Very Low,Very Positive,1569
